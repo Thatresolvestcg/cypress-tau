@@ -1,12 +1,15 @@
 /// <reference types="cypress" />
+import { TodoPage } from "../page-objects/todo-page"
 
 describe('filtering', () => {
-    beforeEach(() => {
-        cy.visit('http://todomvc-app-for-testing.surge.sh/')
+    const todoPage = new TodoPage()
 
-        cy.get('.new-todo').type('Clean Room{enter}')
-        cy.get('.new-todo').type('Learn JavaScript{enter}')
-        cy.get('.new-todo').type('Use Cypress{enter}')
+    beforeEach(() => {
+        todoPage.navigate()
+
+        todoPage.addTodo('Clean Room')
+        todoPage.addTodo('Learn JavaScript')
+        todoPage.addTodo('Use Cypress')
 
         cy.get('.todo-list li:nth-child(2) .toggle').click()
     })
